@@ -61,6 +61,7 @@
 #define FOREACH_FILE_IN_DIR(file, dir, body)                                   \
   do {                                                                         \
     struct dirent *entry;                                                      \
+    const char *file = NULL;                                                   \
     DIR *dirp = opendir(dir);                                                  \
     if (dirp == NULL) {                                                        \
       fprintf(stderr, "Failed to open directory %s: %s\n", dir,                \
@@ -70,6 +71,7 @@
     while ((entry = readdir(dirp)) != NULL) {                                  \
       if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) \
         continue;                                                              \
+      file = entry->d_name;                                                    \
       body;                                                                    \
     }                                                                          \
     closedir(dirp);                                                            \
@@ -272,7 +274,7 @@ void cmd_impl(int ignore, ...) {
     fprintf(stderr, "[ERROR] could not execute command %s\n", argv[0]);
     perror("execvp");
   } else if (cpid < 0) {
-    fprintf(stderr, "[ERROR] could not fork a child process\n", argv[0]);
+    fprintf(stderr, "[ERROR] could not fork a child process\n");
     perror("fork");
     exit(1);
   }
