@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "X:/Code/Build System in C/build",
+    "command": "C:\\PROGRA~1\\LLVM\\bin\\clang.exe -Wall -Wextra -Wpedantic -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -o CMakeFiles\\build.dir\\build.c.obj -c \"X:\\Code\\Build System in C\\build.c\"",
+    "file": "X:\\Code\\Build System in C\\build.c"
+  }
+]
