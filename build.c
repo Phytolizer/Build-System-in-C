@@ -1,19 +1,35 @@
 #include "build.h"
 #include <stdio.h>
 
+#ifdef _WIN32
+#define CFLAGS                                                                 \
+  "/std:c11", "/O2", "/FC", "/W4", "/WX", "/wd4996", "/nologo",                \
+      "/Fe.\\build\\bin\\", "/Fo.\\build\\bin\\"
+#else
 #define CFLAGS                                                                 \
   "-Wall", "-Wextra", "-Wswitch-enum", "-Wmissing-prototypes", "-Wconversion", \
       "-Wpedantic", "-fno-strict-aliasing", "-ggdb", "-std=c11"
+#endif
 
 const char *toolchain[] = {"basm", "bme", "bmr", "debasm", "bdb", "basm2nasm"};
+
+#ifdef _WIN32
+void build_c_file(const char *input_path, const char *output_path) {
+  (void)output_path;
+  CMD("cl.exe", CFLAGS, input_path);
+}
+#else
+void build_c_file(const char *input_path, const char *output_path) {
+  CMD("cc", CFLAGS, "-o", output_path, input_path);
+}
+#endif
 
 int main() {
   MKDIRS("build", "bin");
 
   FOREACH_ARRAY(const char *, tool, toolchain, {
     printf("Building %s...\n", CONCAT(tool, ".c"));
-    CMD("clang", CFLAGS, "-o", PATH("build", "bin", tool),
-        PATH("src", CONCAT(tool, ".c")));
+    build_c_file(CONCAT(tool, ".c"), PATH("build", "bin", tool));
   });
 
   MKDIRS("build", "examples");
