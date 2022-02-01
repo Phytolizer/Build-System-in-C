@@ -3,7 +3,7 @@
 
 #ifdef _WIN32
 #define CFLAGS                                                                 \
-  "/std:c11", "/O2", "/FC", "/W4", "/WX", "/wd4996", "/nologo",                \
+  "/std:c11", "/O2", "/FC", "/W4", "/WX", "/analyze", "/wd4996", "/nologo",    \
       "/Fe.\\build\\bin\\", "/Fo.\\build\\bin\\", "/diagnostics:caret"
 #else
 #define CFLAGS                                                                 \
