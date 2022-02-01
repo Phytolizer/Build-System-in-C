@@ -253,12 +253,12 @@ void cmd_impl(int ignore, ...) {
 #else
   size_t argc = 0;
   va_list args;
-  FOREACH_VARGS(arg, args, { argc += 1; });
+  FOREACH_VARGS(ignore, arg, args, { argc += 1; });
 
   char **argv = calloc(argc + 1, sizeof(char *));
 
   argc = 0;
-  FOREACH_VARGS(arg, args, {
+  FOREACH_VARGS(ignore, arg, args, {
     size_t n = strlen(arg);
     argv[argc] = calloc(n + 1, 1);
     memcpy(argv[argc], arg, n);
