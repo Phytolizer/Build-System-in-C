@@ -12,12 +12,12 @@
 #endif
 
 #ifdef _WIN32
-void build_c_file(const char *input_path, const char *output_path) {
+static void build_c_file(const char *input_path, const char *output_path) {
   (void)output_path;
   CMD("cl.exe", CFLAGS, input_path);
 }
 #else
-void build_c_file(const char *input_path, const char *output_path) {
+static void build_c_file(const char *input_path, const char *output_path) {
   CMD("cc", CFLAGS, "-o", output_path, input_path);
 }
 #endif
