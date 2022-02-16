@@ -17,13 +17,6 @@
 #include <unistd.h>
 #endif
 
-#ifdef _WIN32
-#define PATH_SEP "\\"
-#else
-#define PATH_SEP "/"
-#endif
-#define PATH_SEP_LEN (sizeof PATH_SEP - 1)
-
 #define FOREACH_VARGS(param, arg, args, body)                                  \
   do {                                                                         \
     va_start(args, param);                                                     \
@@ -114,7 +107,7 @@ const char *concat_sep_impl(const char *sep, ...) {
 
 #define CONCAT_SEP(...) concat_sep_impl(__VA_ARGS__, NULL)
 
-#define PATH(...) CONCAT_SEP(PATH_SEP, __VA_ARGS__, NULL)
+#define PATH(...) CONCAT_SEP("/", __VA_ARGS__, NULL)
 
 _Bool mkdir_cross(const char *path, const int mode) {
 #ifdef _WIN32
@@ -138,7 +131,7 @@ void mkdirs_impl(int ignore, ...) {
   seps_count -= 1;
 
   assert(length > 0);
-  char *result = calloc(length + seps_count * PATH_SEP_LEN + 1, 1);
+  char *result = calloc(length + seps_count * 1 + 1, 1);
   if (result == NULL) {
     return;
   }
@@ -150,8 +143,8 @@ void mkdirs_impl(int ignore, ...) {
     length += n;
 
     if (seps_count > 0) {
-      memcpy(result + length, PATH_SEP, PATH_SEP_LEN);
-      length += PATH_SEP_LEN;
+      memcpy(result + length, "/", 1);
+      length += 1;
       seps_count -= 1;
     }
 
