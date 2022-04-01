@@ -11,5 +11,18 @@
         ],
         "directory": "/home/kyle/Documents/Build-System-in-C",
         "file": "/home/kyle/Documents/Build-System-in-C/build.c"
+    },
+    {
+        "arguments": [
+            "/usr/bin/g++",
+            "-c",
+            "-std=c++20",
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic",
+            "build.cpp"
+        ],
+        "directory": "/home/kyle/Documents/Build-System-in-C/cpp",
+        "file": "/home/kyle/Documents/Build-System-in-C/cpp/build.cpp"
     }
 ]
