@@ -1,5 +1,6 @@
 #pragma once
 
+#include <errno.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -59,8 +60,9 @@ char* path_impl(int ignore, ...) {
 #define PATH(...) path_impl(69, __VA_ARGS__, NULL)
 
 void mkdir_or_die(const char* path) {
+    printf("[INFO] mkdir: %s\n", path);
     int result = mkdir(path, 0755);
-    if (result == -1) {
+    if (result == -1 && errno != EEXIST) {
         perror("mkdir");
         exit(EXIT_FAILURE);
     }

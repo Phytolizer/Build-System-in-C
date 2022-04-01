@@ -3,6 +3,6 @@
 #include <stdio.h>
 
 int main(void) {
-    mkdirs(PATH("hello", "world"));
+    mkdirs(PATH("build"));
     return 0;
 }
