@@ -1,7 +1,6 @@
 .cache/
 .vscode/
-build/
-compile_commands.json
+build
 *.exe
 *.obj
 *.o

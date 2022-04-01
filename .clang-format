@@ -6,3 +6,4 @@ ColumnLimit: 100
 AllowShortFunctionsOnASingleLine: Empty
 AlignOperands: false
 AlignAfterOpenBracket: false
+IncludeBlocks: Regroup

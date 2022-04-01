@@ -1,0 +1,15 @@
+[
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-c",
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic",
+            "build.c"
+        ],
+        "directory": "/home/kyle/Documents/Build-System-in-C",
+        "file": "/home/kyle/Documents/Build-System-in-C/build.c"
+    }
+]
