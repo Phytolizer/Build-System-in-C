@@ -3,8 +3,6 @@
 #include <stdio.h>
 
 int main(void) {
-    char* p = PATH("hello", "world");
-    printf("%s\n", p);
-    free(p);
+    mkdirs(PATH("hello", "world"));
     return 0;
 }

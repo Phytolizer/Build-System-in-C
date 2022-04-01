@@ -1,9 +1,12 @@
 #pragma once
 
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #ifdef _WIN32
 #define PATH_SEPARATOR "\\"
@@ -54,3 +57,28 @@ char* path_impl(int ignore, ...) {
 }
 
 #define PATH(...) path_impl(69, __VA_ARGS__, NULL)
+
+void mkdir_or_die(const char* path) {
+    int result = mkdir(path, 0755);
+    if (result == -1) {
+        perror("mkdir");
+        exit(EXIT_FAILURE);
+    }
+}
+
+void mkdirs(char* path) {
+    char* slash = path;
+    while (true) {
+        slash = strstr(slash, PATH_SEPARATOR);
+        if (slash == NULL) {
+            mkdir_or_die(path);
+            break;
+        }
+
+        *slash = '\0';
+        mkdir_or_die(path);
+        *slash = PATH_SEPARATOR[0];
+        slash += PATH_SEPARATOR_LENGTH;
+    }
+    free(path);
+}
